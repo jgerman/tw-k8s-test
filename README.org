@@ -1,0 +1,35 @@
+* tw-k8s-test
+
+Simplest project to use to play with k8s. Technically you'd need leiningen to build but I've checked in the jars so that step can be skipped.
+
+To build:
+
+#+begin_src sh
+  lein uberjar # can be skipped unless code changes are made
+  docker build -t tradeswell/k8s-test .  # or similar
+#+end_src
+
+
+Port 3000 is open and returnss "ok"
+
+#+begin_src sh
+  ❯ http :3000
+  HTTP/1.1 200 OK
+  Content-Length: 2
+  Content-Type: text/html;charset=utf-8
+  Date: Fri, 29 Oct 2021 15:50:23 GMT
+  Server: Jetty(9.4.42.v20210604)
+  Set-Cookie: ring-session=49eb660a-a375-478c-834d-39a5fcb108ab;Path=/;HttpOnly;SameSite=Strict
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+
+  ok
+#+end_src
+
+
+Every minute the app queries the ads data service and dumps a log message to stdout:
+
+#+begin_src sh
+  Top Execution at:  2021-10-29T15:51:19.965068Z  ::  AmazonAds_219066996692384_DAILYLB_GROUPB_198Zrmr71zw34YQUmXuDfb
+#+end_src
